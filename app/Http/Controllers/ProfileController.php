@@ -10,11 +10,15 @@ use App\Models\User;
 use App\Http\Requests\PostUserRequest;
 use Illuminate\Support\Facades\Storage;
 
+use App\Services\ProfileService;
+
 class ProfileController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+
+        $this->profileService = new ProfileService();
     }
 
     /**
@@ -47,10 +51,10 @@ class ProfileController extends Controller
         $user->username   = $request->username;
         $user->birth_date = $request->birth_date;
 
+
         if ($request->image) {
-            $name = time() . '_' . Auth::user()->id . '.' . $request->image->extension();
-            $request->image->move(public_path('images') . '/profile-pictures', $name);
-            $user->image = $name;
+            $image       = $this->profileService->handleImageUploadForProfilePicture($request->image, $user);
+            $user->image = $image;
         }
 
         $user->save();
