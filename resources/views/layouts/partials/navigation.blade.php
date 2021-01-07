@@ -16,7 +16,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}">
+                            <a class="nav-link" href="{{ route('journals') }}">
                                 <i class="fas fa-book"></i> Journals
                             </a>
                         </li>

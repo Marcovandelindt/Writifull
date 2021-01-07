@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ProfileController;
 
 /*
@@ -21,6 +22,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/me', [ProfileController::class, 'index'])->name('profile');
 Route::post('/me', [ProfileController::class, 'update']);
+
+# Journal routes
+Route::get('/journals', [JournalController::class, 'index'])->name('journals');
+Route::get('/journals/create', [JournalController::class, 'create'])->name('journals.create');
+Route::post('/journals/create', [JournalController::class, 'store']);
 
 Auth::routes();
 

@@ -9985,3 +9985,10 @@ h3 {
 .profile-form-group {
   padding-top: 15px;
 }
+
+.create-journal-button {
+  margin-top: 10px;
+}
+.create-journal-button i {
+  margin-right: 10px;
+}
