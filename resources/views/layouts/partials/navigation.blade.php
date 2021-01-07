@@ -8,6 +8,9 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                    @auth
+
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
@@ -36,6 +39,8 @@
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> &nbsp;
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
+
+                    @endauth
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

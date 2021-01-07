@@ -29,6 +29,7 @@
         <main class="py-4">
             <div class="container">
                 <div class="row">
+                    @auth
                     <div class="col-md-3">
                         <div class="card custom-card d-md-block d-sm-none d-xs-none">
                             <img class="card-img-top" src="{{ Auth::user()->image ? asset('images/profile-pictures/' . Auth::user()->image) : '' }}">
@@ -48,7 +49,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-9">
+                    @endauth
+                    <div class="col-md-{{ Auth::user() ? '9' : '12' }}">
                         @yield('content')
                     </div>
                 </div>
