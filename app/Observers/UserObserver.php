@@ -26,4 +26,19 @@ class UserObserver
     {
         
     }
+
+    /**
+     * Handle the updating event
+     * 
+     * @param \App\Models\User
+     */
+    public function updating(User $user)
+    {
+        if ($user->isDirty('username')) {
+            if (User::where('username', $user->username)->first()) {
+                Session::flash('error', 'This username already exists, please choose a different one');
+                return false;
+            }
+        }
+    }
 }

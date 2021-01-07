@@ -3,6 +3,7 @@
 
 // Variables
 @import 'variables';
+@import 'classes';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
@@ -13,4 +14,8 @@
     .card-img-top {
         height: 250px;
     }
+}
+
+.profile-form-group {
+    padding-top: 15px;
 }
