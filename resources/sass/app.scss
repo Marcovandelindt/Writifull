@@ -6,3 +6,11 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.custom-card {
+    border: 0px;
+
+    .card-img-top {
+        height: 250px;
+    }
+}

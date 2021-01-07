@@ -9971,3 +9971,9 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.custom-card {
+  border: 0px;
+}
+.custom-card .card-img-top {
+  height: 250px;
+}
