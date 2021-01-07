@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="card custom-card d-md-block d-sm-none d-xs-none">
-                            <img class="card-img-top" src="https://img.icons8.com/cute-clipart/344/user-male-circle.png">
+                            <img class="card-img-top" src="{{ Auth::user()->image ? asset('images/profile-pictures/' . Auth::user()->image) : '' }}">
                             <div class="card-body">
                                 <h4><strong>{{ Auth::user()->name }}</strong></h4>
                                 <div class="d-flex justify-content-center">

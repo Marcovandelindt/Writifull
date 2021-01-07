@@ -40,5 +40,12 @@ class UserObserver
                 return false;
             }
         }
+
+        if ($user->isDirty('email')) {
+            if (User::where('email', $user->email)->first()) {
+                Session::flash('error', 'This email already exists, please choose a different one');
+                return false;
+            }
+        }
     }
 }

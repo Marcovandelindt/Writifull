@@ -7,6 +7,8 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use App\Models\User;
+use App\Http\Requests\PostUserRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -33,17 +35,23 @@ class ProfileController extends Controller
     /**
      * Update the user's details
      * 
-     * @param \Illuminate\Http\Reqeust $request
+     * @param \App\Http\Reqeusts\PostUserRequest $request
      * 
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request): RedirectResponse
+    public function update(PostUserRequest $request): RedirectResponse
     {
         $user = User::findOrFail(Auth::user()->id);
-        
+
         $user->name       = $request->name;
         $user->username   = $request->username;
         $user->birth_date = $request->birth_date;
+
+        if ($request->image) {
+            $name = time() . '_' . Auth::user()->id . '.' . $request->image->extension();
+            $request->image->move(public_path('images') . '/profile-pictures', $name);
+            $user->image = $name;
+        }
 
         $user->save();
 
