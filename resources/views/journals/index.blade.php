@@ -38,7 +38,7 @@
         @if (count($journals) > 0)
             @foreach ($journals as $journal)
             <tr>
-                <td>{{ $journal->name }}</td>
+                <td><a href="{{ route('journals.detail', ['id' => $journal->id]) }}">{{ $journal->name }}</a></td>
                 <td><i class="fas fa-{{ $journal->locked ? 'lock' : 'lock-open' }}"></i></td>
                 <td>12</td>
                 <td>{{ $journal->created_at }}</td>

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Models\JournalEntry;
+
 class Journal extends Model
 {
     use HasFactory, SoftDeletes;
@@ -21,4 +23,12 @@ class Journal extends Model
         'user_id',
         'locked', 
     ];
+
+    /**
+     * Get entries belonging to a journal
+     */
+    public function entries()
+    {
+        return $this->hasMany(JournalEntry::class, 'journal_id');
+    }
 }

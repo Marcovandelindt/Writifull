@@ -27,6 +27,7 @@ Route::post('/me', [ProfileController::class, 'update']);
 Route::get('/journals', [JournalController::class, 'index'])->name('journals');
 Route::get('/journals/create', [JournalController::class, 'create'])->name('journals.create');
 Route::post('/journals/create', [JournalController::class, 'store']);
+Route::get('/journals/{id}', [JournalController::class, 'detail'])->name('journals.detail');
 
 Auth::routes();
 

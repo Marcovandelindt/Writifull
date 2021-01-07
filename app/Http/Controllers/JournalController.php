@@ -72,4 +72,26 @@ class JournalController extends Controller
 
         return redirect()->route('journals')->with('status', 'Journal created!');
     }
+
+       /**
+     * Show detail view of a journal
+     * 
+     * @param int $id
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function detail($id)
+    {
+        $journal = Journal::findOrFail($id);
+        
+        $entries = $journal->entries;        
+
+        $data = [
+            'title'   => $journal->name,
+            'journal' => $journal,
+            'entries' => $entries,
+        ];
+
+        return view('journals.detail')->with($data);
+    }
 }
