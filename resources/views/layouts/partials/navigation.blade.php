@@ -35,8 +35,8 @@
                         </li>
                     </ul>
 
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> &nbsp;
+                    <form class="d-flex" method="GET" action="{{ route('search') }}" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q"> &nbsp;
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
 

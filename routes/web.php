@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -32,6 +33,9 @@ Route::get('/journals/{id}', [JournalController::class, 'detail'])->name('journa
 
 # User routes
 Route::get('/users/{id}', [UserController::class, 'index'])->name('users');
+
+# Search Routes
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Auth::routes();
 
