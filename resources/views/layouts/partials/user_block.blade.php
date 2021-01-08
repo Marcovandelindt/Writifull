@@ -5,7 +5,7 @@
             <h4><strong>{{ $user->name }}</strong></h4>
             <div class="d-flex justify-content-center">
                 <div class="p-2">
-                    {{ count($entries[0]) }} Entries
+                    {{ isset($entries[0]) ? count($entries[0]) : 0 }} Entries
                 </div>
                 <div class="p-2">
                     12 Friends
