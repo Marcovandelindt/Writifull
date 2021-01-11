@@ -32,7 +32,9 @@
                     @if (str_contains(url()->current(), 'user'))
                         @include('layouts.partials.user_block')
                     @else
-                        @include('layouts.partials.auth_block')
+                        @auth
+                            @include('layouts.partials.auth_block')
+                        @endauth
                     @endif
                     <div class="col-md-{{ Auth::user() ? '9' : '12' }}">
                         @yield('content')
