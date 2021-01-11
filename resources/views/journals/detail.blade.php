@@ -3,6 +3,12 @@
 @section('content')
 <h1 class="display-4">{{ $journal->name }} - Entries</h1>
 
+@if (session('status'))
+    <div class="alert alert-info" role="alert">
+        {{ session('status') }}
+    </div>
+@endif
+
 <table class="table table-striped text-center">
     <thead>
         <tr>
@@ -39,4 +45,6 @@
         @endif
     </tbody>
 </table>
+
+<a class="btn btn-success" href="{{ route('journal.entry', ['id' => $journal->id]) }}">Create new entry</a>
 @endsection

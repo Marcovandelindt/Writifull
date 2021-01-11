@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JournalController;
+use App\Http\Controllers\JournalEntryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
@@ -30,6 +31,10 @@ Route::get('/journals', [JournalController::class, 'index'])->name('journals');
 Route::get('/journals/create', [JournalController::class, 'create'])->name('journals.create');
 Route::post('/journals/create', [JournalController::class, 'store']);
 Route::get('/journals/{id}', [JournalController::class, 'detail'])->name('journals.detail');
+
+# Journal entry routes
+Route::get('/journals/{id}/entry', [JournalEntryController::class, 'index'])->name('journal.entry');
+Route::post('/journals/{id}/entry', [JournalEntryController::class, 'store']);
 
 # User routes
 Route::get('/users/{id}', [UserController::class, 'index'])->name('users');
