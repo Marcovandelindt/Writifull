@@ -61,4 +61,22 @@ class User extends Authenticatable
     {
         return $this->hasMany(JournalEntry::class);
     }
+
+    /**
+     * Get the users friends
+     */
+    public function friendsOfMine()
+    {
+        return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id');
+    }
+
+    public function friendOf()
+    {
+        return $this->belongsToMany(User::class, 'friends', 'friend_id', 'user_id');
+    }
+
+    public function friends()
+    {
+        return $this->friendsOfMine()->wherePivot('accepted', 1)->get()->merge($this->friendOf()->wherePivot('accepted', 1)->get());
+    }
 }

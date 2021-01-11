@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FriendsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,6 +43,9 @@ Route::get('/users/{id}', [UserController::class, 'index'])->name('users');
 
 # Search Routes
 Route::get('/search', [SearchController::class, 'search'])->name('search');
+
+# Friends routes
+Route::get('/friends', [FriendsController::class, 'index'])->name('friends');
 
 Auth::routes();
 
