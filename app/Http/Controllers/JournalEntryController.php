@@ -28,11 +28,15 @@ class JournalEntryController extends Controller
      * 
      * @param int $journal_id
      * 
-     * @return \Illuminate\View\View
+     * @return mixed \Illuminate\View\View | \Illuminate\Http\RedirectResponse
      */
-    public function index($journal_id): View
+    public function index($journal_id): mixed
     {
         $journal = Journal::findOrFail($journal_id);
+
+        if (!Auth::user()->isAllowedToJournal($journal)) {
+            return redirect()->route('home');
+        }
 
         $data = [
             'title'   => 'New entry - ' . $journal->name,
@@ -71,13 +75,17 @@ class JournalEntryController extends Controller
      * @param int $journalId
      * @param int $entryId
      * 
-     * @return \Illuminate\View\View
+     * @return mixed \Illuminate\View\View | \Illuminate\Http\RedirectResponse
      */
-    public function edit($journalId, $entryId): View
+    public function edit($journalId, $entryId): mixed
     {
         $journal = Journal::findOrFail($journalId);
 
         $journalEntry = JournalEntry::findOrFail($entryId);
+
+        if (!Auth::user()->isAllowedToJournalEntry($journalEntry)) {
+            return redirect()->route('home');
+        }
 
         $data = [
             'title'        => 'Edit - ' . $journalEntry->title,
@@ -122,6 +130,10 @@ class JournalEntryController extends Controller
     public function delete($entryId): RedirectResponse
     {
         $journalEntry = JournalEntry::findOrFail($entryId);
+
+        if (!Auth::user()->isAllowedToJournalEntry($journalEntry)) {
+            return redirect()->route('home');
+        }
     
         $journal = Journal::findOrFail($journalEntry->journal_id);
 

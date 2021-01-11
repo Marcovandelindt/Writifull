@@ -83,6 +83,10 @@ class JournalController extends Controller
     public function detail($id)
     {
         $journal = Journal::findOrFail($id);
+
+        if (!Auth::user()->isAllowedToJournal($journal)) {
+            return redirect()->route('home');
+        }
         
         $entries = $journal->entries;        
 

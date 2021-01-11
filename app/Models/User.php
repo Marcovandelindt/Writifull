@@ -120,4 +120,32 @@ class User extends Authenticatable
 
         return $journalEntries;
     }
+
+    /**
+     * Check if the currently authenticated user is allowed to see the journal
+     * 
+     * @param \App\Models\Journal $journal
+     */
+    public function isAllowedToJournal(Journal $journal)
+    {
+        if ($journal->user_id == $this->id) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if the currently authenticated user is allowed to see the journal entry
+     * 
+     * @param \App\Models\JournalEntry $journal
+     */
+    public function isAllowedToJournalEntry(JournalEntry $journalEntry)
+    {
+        if ($journalEntry->user_id == $this->id) {
+            return true;
+        }
+
+        return false;
+    }
 }
