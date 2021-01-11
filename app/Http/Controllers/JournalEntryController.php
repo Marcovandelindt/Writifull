@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreJournalEntryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+Use Illuminate\Support\Facades\Crypt;
+use Illuminate\View\View;
+
+use App\Http\Requests\StoreJournalEntryRequest;
+
 use App\Models\Journal;
 use App\Models\JournalEntry;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 
 class JournalEntryController extends Controller
 {
@@ -51,8 +54,8 @@ class JournalEntryController extends Controller
 
         $journalEntry = new JournalEntry();
 
-        $journalEntry->title      = $request->title;
-        $journalEntry->body       = $request->body;
+        $journalEntry->title      = Crypt::encrypt($request->title);
+        $journalEntry->body       = Crypt::encrypt($request->body);
         $journalEntry->user_id    = Auth::user()->id;
         $journalEntry->journal_id = $journal->id;
         $journalEntry->locked     = $request->locked;

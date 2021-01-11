@@ -10,10 +10,10 @@
         @foreach ($journalEntries as $entry)
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $entry->title }}</h5>
+                    <h5 class="card-title">{{ $entry->getTitle() }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">Posted by: {{ $entry->user->name }} on {{ $entry->created_at }}</h6>
                     <br />
-                    {!! $entry->body !!}
+                    {!! $entry->getBody() !!}
                 </div>
             </div>
             <br />

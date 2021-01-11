@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Journal;
+use Illuminate\Support\Facades\Crypt;
 
 class JournalEntry extends Model
 {
@@ -25,5 +26,21 @@ class JournalEntry extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the title of a journal entry
+     */
+    public function getTitle()
+    {
+        return Crypt::decrypt($this->title);
+    }
+
+    /**
+     * Get the body of a journal entry
+     */
+    public function getBody()
+    {
+        return Crypt::decrypt($this->body);
     }
 }

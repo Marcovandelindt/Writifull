@@ -12,11 +12,11 @@
     </div>
     <div class="form-group profile-form-group">
         <label for="title" class="is-bold">Title: *</label><br />
-        <input type="text" name="title" id="title" class="form-control mb-4" id="title" value="{{ $journalEntry->title }}" />
+        <input type="text" name="title" id="title" class="form-control mb-4" id="title" value="{{ $journalEntry->getTitle() }}" />
     </div>
     <div class="form-group">
         <label for="name" class="is-bold">Body: *</label>
-        <textarea class="ckeditor" id="body" name="body">{{ $journalEntry->body }}</textarea>
+        <textarea class="ckeditor" id="body" name="body">{{ $journalEntry->getBody() }}</textarea>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-success">Save</button>

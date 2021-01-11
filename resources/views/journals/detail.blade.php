@@ -39,9 +39,9 @@
         @if (count($entries) > 0)
             @foreach ($entries as $entry)
                 <tr>
-                    <td>{{ $entry->title }}</td>
+                    <td>{{ $entry->getTitle() }}</td>
                     <td><i class="fas fa-{{ $entry->locked ? 'lock' : 'lock-open' }}"></i></td>
-                    <td>{{ $journal->name}}</td>
+                    <td>{{ $journal->name }}</td>
                     <td>{{ $entry->created_at }}</td>
                     <td>{{ $entry->updated_at }}</td>
                     <td><a class="btn btn-warning" href="{{ route('journal.entry.edit', ['journal_id' => $journal->id, 'entry_id' => $entry->id]) }}">Edit</a></td>
