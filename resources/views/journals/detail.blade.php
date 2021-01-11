@@ -27,10 +27,16 @@
             <th scope="col">
                 Last update
             </th>
+            <th scope="col">
+                &nbsp;
+            </th>
+            <th scope="col">
+                &nbsp;
+            </th>
         </tr>
     </thead>
     <tbody>
-        @if (!empty($entries))
+        @if (count($entries) > 0)
             @foreach ($entries as $entry)
                 <tr>
                     <td>{{ $entry->title }}</td>
@@ -38,10 +44,14 @@
                     <td>{{ $journal->name}}</td>
                     <td>{{ $entry->created_at }}</td>
                     <td>{{ $entry->updated_at }}</td>
+                    <td><a class="btn btn-warning" href="{{ route('journal.entry.edit', ['journal_id' => $journal->id, 'entry_id' => $entry->id]) }}">Edit</a></td>
+                    <td><a class="btn btn-danger" href="{{ route('journal.entry.delete', ['entry_id' => $entry->id]) }}">Delete</a></td>
                 </tr>
             @endforeach
         @else
-
+            <tr>
+            <td colspan="7"><i>Unfortunately we couldn't find any entries for this journal...</i></td>
+            </tr>
         @endif
     </tbody>
 </table>

@@ -35,7 +35,8 @@ Route::get('/journals/{id}', [JournalController::class, 'detail'])->name('journa
 # Journal entry routes
 Route::get('/journals/{id}/entry', [JournalEntryController::class, 'index'])->name('journal.entry');
 Route::post('/journals/{id}/entry', [JournalEntryController::class, 'store']);
-
+Route::get('/journals/{journal_id}/{entry_id}/edit', [JournalEntryController::class, 'edit'])->name('journal.entry.edit');
+Route::get('/journals/entry/{entry_id}/delete', [JournalEntryController::class, 'delete'])->name('journal.entry.delete');
 # User routes
 Route::get('/users/{id}', [UserController::class, 'index'])->name('users');
 
