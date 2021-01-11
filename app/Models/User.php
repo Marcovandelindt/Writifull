@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Models\Journal;
+use App\Models\JournalEntry;
 
 class User extends Authenticatable
 {
@@ -51,5 +52,13 @@ class User extends Authenticatable
     public function journals()
     {
         return $this->hasMany(Journal::class);
+    }
+
+    /**
+     * Get the journal entries belonging to the user
+     */
+    public function journalEntries()
+    {
+        return $this->hasMany(JournalEntry::class);
     }
 }

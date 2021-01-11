@@ -18,4 +18,12 @@ class JournalEntry extends Model
     {
         return $this->belongsTo(Journal::class);
     }
+
+    /**
+     * Get the user beloning to an entry
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

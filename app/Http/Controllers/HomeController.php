@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+Use Illuminate\Support\Facades\Auth;
+use App\Models\JournalEntry;
+use App\Models\Journal;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.index');
+        $journalEntries = [];
+
+        foreach (JournalEntry::where('user_id', Auth::user()->id)->get() as $entry) {
+            $journalEntries[] = $entry;
+        }
+
+        $data = [
+            'title'          => 'Home',
+            'page'           => 'home',
+            'journalEntries' => $journalEntries,
+        ];
+
+        return view('home.index')->with($data);
     }
 }
