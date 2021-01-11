@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+Use Illuminate\Support\Facades\DB;
 
 use App\Models\Journal;
 use App\Models\JournalEntry;
@@ -102,5 +103,21 @@ class User extends Authenticatable
         }
 
         return $image;
+    }
+
+    /**
+     * Get the journal entries from a friend
+     */
+    public function getFriendJournalEntries()
+    {
+        $journalEntries = DB::table('users')
+                                ->join('journals', 'journals.user_id', '=', 'users.id')
+                                ->join('journal_entries', 'journal_entries.journal_id', '=', 'journals.id')
+                                ->select('journal_entries.*')
+                                ->where('journals.locked', '=', '0')
+                                ->where('journal_entries.locked', '0')
+                                ->get();
+
+        return $journalEntries;
     }
 }

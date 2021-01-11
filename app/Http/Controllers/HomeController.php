@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 Use Illuminate\Support\Facades\Auth;
 use App\Models\JournalEntry;
 use App\Models\Journal;
+use App\Services\JournalEntryService;
 
 class HomeController extends Controller
 {
@@ -17,6 +18,8 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        $this->journalEntryService = new JournalEntryService();
     }
 
     /**
@@ -26,16 +29,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $journalEntries = [];
-
-        foreach (JournalEntry::where('user_id', Auth::user()->id)->get() as $entry) {
-            $journalEntries[] = $entry;
-        }
+        $journalEntries = $this->journalEntryService->getAllJournalEntriesToShow(Auth::user());
 
         $data = [
             'title'          => 'Home',
             'page'           => 'home',
             'journalEntries' => $journalEntries,
+
         ];
 
         return view('home.index')->with($data);

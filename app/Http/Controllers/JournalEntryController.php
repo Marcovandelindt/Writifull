@@ -55,6 +55,7 @@ class JournalEntryController extends Controller
         $journalEntry->body       = $request->body;
         $journalEntry->user_id    = Auth::user()->id;
         $journalEntry->journal_id = $journal->id;
+        $journalEntry->locked     = $request->locked;
 
         $journalEntry->save();
 
@@ -99,8 +100,9 @@ class JournalEntryController extends Controller
 
         $journalEntry = JournalEntry::findOrFail($entryId);
 
-        $journalEntry->title = $request->title;
-        $journalEntry->body  = $request->body;
+        $journalEntry->title  = $request->title;
+        $journalEntry->body   = $request->body;
+        $journalEntry->locked = $request->locked;
 
         $journalEntry->save();
 

@@ -16,6 +16,7 @@
                     {!! $entry->body !!}
                 </div>
             </div>
+            <br />
         @endforeach
     @else
         <i>You currently have no posts to view. To fill up your feed, create the posts yourself or add some friends!</i>

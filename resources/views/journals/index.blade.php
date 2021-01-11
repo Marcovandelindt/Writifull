@@ -40,7 +40,7 @@
             <tr>
                 <td><a href="{{ route('journals.detail', ['id' => $journal->id]) }}">{{ $journal->name }}</a></td>
                 <td><i class="fas fa-{{ $journal->locked ? 'lock' : 'lock-open' }}"></i></td>
-                <td>12</td>
+                <td>{{ $journal->entries->count() }}</td>
                 <td>{{ $journal->created_at }}</td>
                 <td>{{ !empty($journal->updated_at) ? $journal->updated_at : '' }}</td>
             </tr>
