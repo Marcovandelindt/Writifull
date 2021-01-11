@@ -70,13 +70,37 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id');
     }
 
+    /**
+     * Check whether the current user is friends with another user
+     */
     public function friendOf()
     {
         return $this->belongsToMany(User::class, 'friends', 'friend_id', 'user_id');
     }
 
+    /**
+     * Get friends
+     */
     public function friends()
     {
         return $this->friendsOfMine()->wherePivot('accepted', 1)->get()->merge($this->friendOf()->wherePivot('accepted', 1)->get());
+    }
+
+    /**
+     * Get the profile picture
+     * 
+     * @return string
+     */
+    public function getProfilePicture(): string 
+    {
+        $image = '';
+
+        if (!empty($this->image)) {
+            $image = asset('images/profile-pictures/' . $this->image);    
+        } else {
+            $image = 'https://via.placeholder.com/150';
+        }
+
+        return $image;
     }
 }
