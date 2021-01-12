@@ -24,7 +24,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}">
+                            <a class="nav-link" href="{{ route('friends') }}">
                                 <i class="fas fa-users"></i> Friends
                             </a>
                         </li>

@@ -52,7 +52,7 @@ class FriendsController extends Controller
     }
 
     /**
-     * Accept a friend request
+     * Send a friend request
      * 
      * @param int $id
      * 
@@ -61,6 +61,12 @@ class FriendsController extends Controller
     public function addFriend($id): RedirectResponse
     {
         $user = User::findOrFail($id);
+
+        if (Auth::user()->id === $user->id) {
+            return redirect()
+                ->route('users', ['id' => $user->id])
+                ->with('status', 'Please don\'t add yourself as a friend :)');
+        }
 
         # Check if any friend requests are already pending
         if (Auth::user()->hasFriendRequestPending($user) || $user->hasFriendRequestPending(Auth::user())) {
@@ -82,5 +88,29 @@ class FriendsController extends Controller
         return redirect()
             ->route('users', ['id' => $user->id])
             ->with('status', 'You have successfully send a friend request to ' . $user->name . '!');
+    }   
+
+    /**
+     * Accept a friend request
+     * 
+     * @param int $id
+     * 
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function accept($id)
+    {
+        $user = User::findOrFail($id);
+
+        # Check if friend request is received
+        if (!Auth::user()->hasFriendRequestReceived($user)) {
+            return redirect()
+                ->route('home');
+        }
+
+        Auth::user()->acceptFriendRequest($user);
+
+        return redirect()
+            ->route('users', ['id' => $user->id])
+            ->with('status', 'You have accepted ' . $user->name . '\'s friend request!');
     }
 }

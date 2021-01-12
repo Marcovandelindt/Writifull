@@ -66,6 +66,7 @@ Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('/friends', [FriendsController::class, 'index'])->name('friends');
 Route::get('/friends/requests', [FriendsController::class, 'showRequests'])->name('friends.requests');
 Route::get('/friends/add/{id}', [FriendsController::class, 'addFriend'])->name('friends.add');
+Route::get('/friends/accept/{id}', [FriendsController::class, 'accept'])->name('friends.accept');
 
 /**
  * Authentication routes

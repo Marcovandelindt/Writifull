@@ -12,10 +12,10 @@
 @if (Auth::user()->hasFriendRequestPending($user))
     <p>Waiting for {{ $user->name }} to accept your request
 @elseif (Auth::user()->hasFriendRequestReceived($user))
-    <a class="btn btn-primary" href="#">Accept Friend Request</a>
+    <a class="btn btn-primary" href="{{ route('friends.accept', ['id' => $user->id]) }}">Accept Friend Request</a>
 @elseif (Auth::user()->isFriendsWith($user)) 
     <p>You and {{ $user->name }} are already friends!</p>
-@else
+@elseif (Auth::user()->id !== $user->id)
     <a href="{{ route('friends.add', ['id' => $user->id]) }}" class="btn btn-primary">Add Friend</a>
 @endif
 
