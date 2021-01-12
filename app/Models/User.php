@@ -169,4 +169,65 @@ class User extends Authenticatable
     {
         return $this->friendOf()->wherePivot('accepted', 0)->get();
     }
+
+    /**
+     * Check if user has a friend request pending
+     * 
+     * @param \App\Models\User $user
+     * 
+     * @return bool
+     */
+    public function hasFriendRequestPending(User $user): bool 
+    {
+        return (bool) $this->getPendingFriendRequests()->where('id', $user->id)->count();
+    }
+
+    /**
+     * Check if the currently authenticated user has received a friend request from particular user
+     * 
+     * @param \App\Models\User $user
+     * 
+     * @return bool
+     */
+    public function hasFriendRequestReceived(User $user): bool
+    {
+        return (bool) $this->getFriendRequests()->where('id', $user->id)->count();
+    }
+
+    /**
+     * Send a friend request
+     * 
+     * @param \App\Models\User $user
+     * 
+     * @return void
+     */
+    public function sendFriendRequest(User $user): void
+    {
+        $this->friendOf()->attach($user->id);
+    }
+
+    /**
+     * Accept a friend request
+     * 
+     * @param \App\Models\User $user
+     * 
+     */
+    public function acceptFriendRequest(User $user)
+    {
+        return $this->getFriendRequests('id', $user->id)->first()->pivot->update([
+            'accepted' => 1
+        ]);
+    }
+
+    /**
+     * Check if users are friends
+     * 
+     * @param \App\Models\User $user
+     * 
+     * @return bool
+     */
+    public function isFriendsWith(User $user): bool
+    {
+        return (bool) $this->friends()->where('id', $user->id)->count();
+    }
 }
