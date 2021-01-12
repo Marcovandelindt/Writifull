@@ -24,8 +24,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('friends') }}">
+                            <a class="nav-link" href="{{ route('home') }}">
                                 <i class="fas fa-users"></i> Friends
+                            </a>
+                        </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('friends.requests') }}">
+                                <i class="fas fa-clock"></i> Friend Requests
                             </a>
                         </li>
                         <li class="nav-item">

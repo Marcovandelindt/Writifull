@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 Use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 
 use App\Models\Journal;
 use App\Models\JournalEntry;
@@ -147,5 +148,25 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    /**
+     * Get the friend requests from the currently authenticated user
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getFriendRequests(): Collection
+    {
+        return $this->friendsOfMine()->wherePivot('accepted', 0)->get();
+    }
+
+    /**
+     * Get the friend requests sent by the currently authenticated user
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getPendingFriendRequests(): Collection
+    {
+        return $this->friendOf()->wherePivot('accepted', 0)->get();
     }
 }

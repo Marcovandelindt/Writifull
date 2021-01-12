@@ -22,31 +22,52 @@ use App\Http\Controllers\UserController;
 |
 */
 
+/**
+ * Home Routes
+ */
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+/**
+ * Profile routes
+ */
 Route::get('/me', [ProfileController::class, 'index'])->name('profile');
 Route::post('/me', [ProfileController::class, 'update']);
 
-# Journal routes
+/**
+ * Journal routes
+ */
 Route::get('/journals', [JournalController::class, 'index'])->name('journals');
 Route::get('/journals/create', [JournalController::class, 'create'])->name('journals.create');
 Route::post('/journals/create', [JournalController::class, 'store']);
 Route::get('/journals/{id}', [JournalController::class, 'detail'])->name('journals.detail');
 
-# Journal entry routes
+/**
+ * Journal entry routes
+ */
 Route::get('/journals/{id}/entry', [JournalEntryController::class, 'index'])->name('journal.entry');
 Route::post('/journals/{id}/entry', [JournalEntryController::class, 'store']);
 Route::get('/journals/{journal_id}/{entry_id}/edit', [JournalEntryController::class, 'edit'])->name('journal.entry.edit');
 Route::post('/journals/{journal_id}/{entry_id}/edit', [JournalEntryController::class, 'update']);
 Route::get('/journals/entry/{entry_id}/delete', [JournalEntryController::class, 'delete'])->name('journal.entry.delete');
-# User routes
+
+/**
+ * User routes
+ */
 Route::get('/users/{id}', [UserController::class, 'index'])->name('users');
 
-# Search Routes
+/**
+ * Search routes
+ */
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 
-# Friends routes
+/**
+ * Friends routes
+ */
 Route::get('/friends', [FriendsController::class, 'index'])->name('friends');
+Route::get('/friends/requests', [FriendsController::class, 'showRequests'])->name('friends.requests');
 
+/**
+ * Authentication routes
+ */
 Auth::routes();
 
